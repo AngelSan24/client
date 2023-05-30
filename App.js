@@ -1,7 +1,7 @@
 // Importar componentes de React Native
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Platform } from 'react-native';
 import Tabla from './components/Tabla';
 
 const customTheme = {
@@ -15,10 +15,19 @@ const App = () => {
 
   // Evento al cargar la app
   useEffect(() => {
-    const getMiembros = () => {
-      fetch('http://localhost:3000/api/datos')
+    const getMiembros = async () => {
+      await fetch('https://mi-app.cleverapps.io/api', {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
+      // AQUI ES DONDE DEBE LEER EL RESULTADO DE LA API
       .then(res => res.json())
       .then(res => setMiembros(res))
+      .catch((err) => console.log(err))
     }
     getMiembros()
   }, []);
@@ -27,7 +36,7 @@ const App = () => {
 
       <View style={estilo.contenedor}>
         <Text h6 style={{textTransform: 'uppercase', 
-        fontWeight: '700', paddingVertical: 15, paddingLeft: 8}}>Lista de Miembros</Text>
+        fontWeight: '700', paddingVertical: 15, paddingLeft: 8}}>Lista de Productos</Text>
 
         <View>
           
@@ -68,7 +77,14 @@ const estilo = StyleSheet.create({
 
   // OTROS ESTILOS //////////////////////////////////
   centradoVertical: {
-    verticalAlign: 'middle',
+    ...Platform.select({
+      web: {
+        textverticalAlign: 'center',
+      },
+      android: {
+        verticalAlign: 'middle',
+      }
+    })
   },
 });
 

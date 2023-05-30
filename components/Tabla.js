@@ -9,18 +9,18 @@ const Tabla = ({miembros}) => {
           miembros.map(
             miembro => (
               // Se supone que cada "child" debe tener id propio
-              <View key={miembro.idMiembro}>
+              <View key={miembro.idProducto}>
                 <View style={styles.label}>
-                <Text style={styles.bold}>IdMiembro: </Text>
-                <Text>{miembro.idMiembro}</Text>
+                <Text style={styles.bold}>IdProducto: </Text>
+                <Text>{miembro.idProducto}</Text>
               </View>
               <View style={styles.label}>
                 <Text style={styles.bold}>Nombres: </Text>
-                <Text>{miembro.Nombres}</Text>
+                <Text>{miembro.nombre}</Text>
               </View>
               <View style={styles.label}>
-                <Text style={styles.bold}>Apellidos: </Text>
-                <Text>{miembro.Apellidos}</Text>
+                <Text style={styles.bold}>Precio: </Text>
+                <Text>{miembro.precio}</Text>
               </View>
               <View style={{width: '100%', backgroundColor: 'lightgray', 
               height: 1, marginVertical: 10}}/>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '500',
-    textTransform: 'uppercase',
+    textTransform: 'none',
   }
 });
 
